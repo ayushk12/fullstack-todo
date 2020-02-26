@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <title>ToDo App</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Todo App</h1>
+        <form class="addTodo" method="POST">
+
+            <div class="row">
+                <div class="col-1-of-1">
+                    <label for="Description">Description</label>
+                    <input type="text" id="Description" name="description" placeholder="What do you need to do?">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-1-of-2">
+                    <label for="Category">Category</label>
+                    <select name="category">
+                        <option selected>Choose...</option>
+                        <option value="personal">Personal</option>
+                        <option value="work">Work</option>
+                        <option value="school">School</option>
+                        <option value="cleaning">Cleaning</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="col-1-of-2">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" name="dueDate">
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" formaction="/todos/addTodo" class="col-1-of-2"><i class="fas fa-plus"></i> ADD TASK</button>
+                <button type="submit" formaction="/todos/deleteTodo" class="col-1-of-2"><i class="fas fa-trash"></i> DELETE TASK</button>
+            </div>
+            <ul>
+                <% for(let i=0;i<todos.length;i++) { %>
+                <li class="todo">
+                    <input class="check" type="checkbox" name="id" value="<%= todos[i]._id %>" />
+                    <span class="todo__description">
+                        <%= todos[i].description %>
+                    </span>
+                    <span class="todo__category-<%= todos[i].category %>">
+                        <%= todos[i].category %>
+                    </span>
+                    <span class="todo__dueDate">
+                        <i class="far fa-calendar-alt"></i>
+                        <%= month[todos[i].dueDate.getMonth()] %> <%= todos[i].dueDate.getDate() %>,
+                        <%= todos[i].dueDate.getFullYear() %>
+                    </span>
+                </li>
+                <% } %>
+            </ul>
+
+        </form>
+    </div>
+
+
+</body>
+
+</html>
